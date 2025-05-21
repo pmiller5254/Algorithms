@@ -5,7 +5,7 @@ class MaxHeap:
         self.heap = []
     
     def heapify(self, arr: list) -> None:
-        """Build a max heap from an array in-place."""
+        # Build a max heap from an array in-place.
         self.heap = arr
         n = len(arr)
         # Start from the last non-leaf node and heapify all nodes in reverse order
@@ -13,7 +13,7 @@ class MaxHeap:
             self._sift_down(i)
     
     def _sift_down(self, idx: int) -> None:
-        """Maintain the max heap property by sifting down the element at index idx."""
+        # Maintain the max heap property by sifting down the element at index idx.
         n = len(self.heap)
         largest = idx
         left = 2 * idx + 1
@@ -33,19 +33,19 @@ class MaxHeap:
             self._sift_down(largest)
     
     def _sift_up(self, idx: int) -> None:
-        """Maintain the max heap property by sifting up the element at index idx."""
+        # Maintain the max heap property by sifting up the element at index idx.
         parent = (idx - 1) // 2
         if idx > 0 and self.heap[idx] > self.heap[parent]:
             self.heap[idx], self.heap[parent] = self.heap[parent], self.heap[idx]
             self._sift_up(parent)
     
     def insert(self, val: int) -> None:
-        """Insert a new value into the heap."""
+        # Insert a new value into the heap.
         self.heap.append(val)
         self._sift_up(len(self.heap) - 1)
     
     def extract_max(self) -> int:
-        """Remove and return the maximum value from the heap."""
+        # Remove and return the maximum value from the heap.
         if not self.heap:
             raise IndexError("Heap is empty")
             
@@ -59,7 +59,7 @@ class MaxHeap:
         return max_val
     
     def get_max(self) -> int:
-        """Return the maximum value without removing it."""
+        # Return the maximum value without removing it.
         if not self.heap:
             raise IndexError("Heap is empty")
         return self.heap[0]
