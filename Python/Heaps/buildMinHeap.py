@@ -10,15 +10,15 @@ class MinHeap:
     
     def parent(self, i):
         # Returns the index of the parent of the node at index i.
-        return self.heap[(i-1) // 2]
+        return (i - 1) // 2
 
     def left_child(self, i):
         # Returns the index of the left child of the node at index i.
-        return self.heap[2 * i + 1]
+        return 2 * i + 1
     
     def right_child(self, i):
         # Returns the index of the right child of the node at index i.
-        return self.heap[2 * i + 2]
+        return 2 * i + 2
     
     def swap(self, i, j):
         # Swaps the elements at indices i and j in the heap.
@@ -27,12 +27,23 @@ class MinHeap:
     def heapify_up(self, i):
         # Maintains the min heap property by bubbling up the element at index i
         # if it's smaller than its parent.
-        pass
+        while i > 0 and self.heap[i] < self.heap[self.parent(i)]:
+            self.swap(i, self.parent(i))
+            i = self.parent(i)
     
     def heapify_down(self, i):
         # Maintains the min heap property by bubbling down the element at index i
         # if it's larger than its children.
-        pass
+        while 2 * i + 1 < len(self.heap):  # Check if left child exists
+            left = 2 * i + 1
+            right = 2 * i + 2
+            smallest = left
+            if right < len(self.heap) and self.heap[right] < self.heap[left]:
+                smallest = right
+            if self.heap[i] <= self.heap[smallest]:
+                break
+            self.swap(i, smallest)
+            i = smallest
     
     def insert(self, key):
         # Inserts a new key into the min heap.
