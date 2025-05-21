@@ -10,19 +10,19 @@ class MinHeap:
     
     def parent(self, i):
         # Returns the index of the parent of the node at index i.
-        return (i-1) // 2
+        return self.heap[(i-1) // 2]
 
     def left_child(self, i):
         # Returns the index of the left child of the node at index i.
-        return 2 * i + 1
+        return self.heap[2 * i + 1]
     
     def right_child(self, i):
         # Returns the index of the right child of the node at index i.
-        pass
+        return self.heap[2 * i + 2]
     
     def swap(self, i, j):
         # Swaps the elements at indices i and j in the heap.
-        pass
+        self.heap[i], self.heap[j] = self.heap[j], self.heap[i]
     
     def heapify_up(self, i):
         # Maintains the min heap property by bubbling up the element at index i
