@@ -47,20 +47,42 @@ class MinHeap:
     
     def insert(self, key):
         # Inserts a new key into the min heap.
-        pass
+        self.heap.append(key)
+        self.heapify_up(len(self.heap) - 1)
     
     def extract_min(self):
         # Removes and returns the minimum element from the heap.
-        pass
+        if len(self.heap) == 0:
+            return None
+        min_val = self.heap[0]
+        self.heap[0] = self.heap[-1]
+        self.heap.pop()
+        self.heapify_down(0)
+        return min_val
     
     def get_min(self):
         # Returns the minimum element without removing it.
-        pass
+        if len(self.heap) == 0:
+            return None
+        return self.heap[0]
     
     def size(self):
         # Returns the number of elements in the heap.
-        pass
+        return len(self.heap)
     
     def is_empty(self):
         # Returns True if the heap is empty, False otherwise.
-        pass
+        return len(self.heap) == 0
+    
+    def build_heap(self, arr):
+        # Builds a min heap from an array.
+        self.heap = arr
+        for i in range(len(self.heap) // 2 - 1, -1, -1):
+            self.heapify_down(i)
+
+    def heap_sort(self, arr):
+        # Sorts an array using heap sort.
+        self.build_heap(arr)
+        sorted_arr = []
+        for _ in range(len(arr)):
+            sorted_arr.append(self.extract_min())
